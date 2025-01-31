@@ -1,0 +1,602 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELECTRÓNICA JV - Especialistas en Sonido y Reparación</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #200000);
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -2;
+        }
+
+        /* Navegación mejorada */
+        .nav-container {
+            background: rgba(0, 0, 0, 0.9); 
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #51ff00;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 1 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #00f2ff;
+            text-shadow: 0 0 15px rgba(23, 168, 175, 0.5);
+            animation: neonGlow 2s infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% {
+                text-shadow: 0 0 10px #52ff02fd;
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: #02ff5e;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00f3ff;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sección Hero con efecto parallax */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle, rgba(4, 20, 4, 0.973) 0%, rgba(0,0,0,0) 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+            animation: parallax 05s infinite alternate;
+        }
+
+        @keyframes parallax {
+            0% {
+                transform: scale(1) translateY(0);
+            }
+            100% {
+                transform: scale(1.1) translateY(-20px);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.7);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ffffff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sección de Productos con efecto de tarjetas 3D */
+        .products-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            perspective: 1000px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px #00f3ff33;
+        }
+    
+
+        .img-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .img-container:hover .product-img {
+            transform: scale(1.1) rotateY(5deg);
+        }
+
+        .price {
+            color: #00f2ff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px #00f3ff80;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quantity-btn {
+            background: rgba(0, 243, 255, 0.3);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #00f3ff;
+            transform: scale(1.1);
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #06f3ff, #0747a8);
+            border: none;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Sección de Contacto con efecto de vidrio */
+        .contact-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 4rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-footer {
+            width: 200px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.5));
+            animation: float 1s infinite alternate;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .service-message {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #00f3ff;
+            text-shadow: 0 0 15px rgba(15, 18, 19, 0.5);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #02ff5e;
+            color: #000000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 2rem 0;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .thanks-message {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-left: 4px solid #00f3ff;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Footer con efecto de neón */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid #02ff5e;
+            box-shadow: 0 0 20px rgba(2, 242, 255, 0.959);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .product-card {
+                padding: 1rem;
+            }
+            
+            .service-message {
+                font-size: 1.5rem;
+            }
+        }
+        
+    </style>
+     <script>
+        // Menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</head>
+<body>
+    <!-- Navegación -->
+    <div class="nav-container">
+        <nav>
+            <div class="logo">ELECTRÓNICA JV</div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Reparación y Venta de Equipos Electrónicos</h1>
+            <p>Electrónica JV es una Tienda de Electrónica ubicada en el municipio de Samaná Caldas, La cual cuenta con servicio técnico especializado en reparación de Equipos Electronicos. Si tienes Un equipo Electrónico, y deseas repararlo "NO DUDES EN CONTACTARNOS". ¡Tenemos Servicio de Revisión Totalmente Gratuito! </p>
+        <p>Contamos con venta de Sonido para tu Negocio y hogar, ademas de eso te damos garantia 100% del producto comprado en nuestra tienda</h1>
+        </div>
+    </section>
+    <section class="products-section" id="productos">
+        <h2 class="section-title">Productos Destacados</h2>
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="Amplificador Audio Sound.jpg" alt="Amplificador ST 1500W" class="product-img">
+                </div>
+                <h3>AMPLIFICADOR ST 1500W AUDIO SOUND ASAMP3000</h3>
+                <ul>
+                    <li>Entrada USB/SD</li>
+                    <li>Bluetooth 5.0</li>
+                    <li>3 entradas para micrófonos</li>
+                    <li>Radio FM integrada</li>
+                    <li>Control remoto</li>
+                    <li>Capacidad para 4 cabinas de 15 Pulgadas</li>
+                </ul>
+                <div class="price">$1.200.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="Screenshot_1_20250127_93332284.jpg" alt="Amplificador de Sonido" class="product-img">
+                </div>
+                <h3>Amplificador de Sonido</h3>
+                <ul>
+                    <li>Puertos USB y mini SD</li>
+                    <li>Radio FM</li>
+                    <li>Capacidad para 2 Cabinas 10 Pulgadas y 3 parlantes tipo teatro</li>
+                    <li>Doble ecualizador</li>
+                    <li>Bluetooth 5.0</li>
+                </ul>
+                <div class="price">$800.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+
+            <!-- Productos 3 al 10 (estructura similar) -->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="CabinaActiva_20250127_21307800.jpg" alt="Amplificador de Sonido" class="product-img">
+                </div>
+                <h3>Cabina de Sonido Activa 15 Pulgadas</h3>
+                <ul>
+                    <li>Puertos USB y mini SD</li>
+                    <li>Parlante: 15" pulgadas</li>
+                    <li>Bluetooth 5.0</li>
+                    <li>Radio FM</li>
+                    <li>Voltaje: 120-230 Voltios (NO es recargable)</li>
+                    <li>Entrada para 2 micrófonos</li>
+                </ul>
+                <div class="price">$900.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+           <!--producto 4-->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="AntenaTDT_20250127_214252348.jpg" alt="Amplificador de Sonido" class="product-img">
+                </div>
+                <h3>Antena aerea TDT</h3>
+                <ul>
+                    <li>Ganancia 6-10 dBi</li>
+                    <li>Incluye cable de 10 metros</li>
+                </ul>
+                <div class="price">$55.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+              <!--producto 6-->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="Amplificador.jpg" alt="Amplificador de Sonido" class="product-img">
+                </div>
+                <h3>Amplificador de Sonido 50W</h3>
+                <ul>
+                    <li>Puertos USB y mini SD</li>
+                    <li>Radio FM</li>
+                    <li>Bluetooth 5.0</li>
+                    <li>Capacidad para 2 parlantes tipo Teatro</li>
+                    <li>Control remoto</li>
+                </ul>
+                <div class="price">$500.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+            <!--producto 7-->
+            <div class="product-card">
+                <div class="img-container">
+                    <img src="Consola.jpg" alt="Amplificador de Sonido" class="product-img">
+                </div>
+                <h3>Behringer XENYX X1622USB</h3>
+                <ul>
+                    <li>Mezclador de 16 canales con interfaz USB</li>
+                    <li>Procesador de efectos integrado de 24 bits</li>
+                    <li>Ecualizadores de estilo "británico"</li>
+                    <li>Garantía limitada de 6 meses por behringer</li>
+                </ul>
+                <div class="price">$2.000.000</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn">-</button>
+                    <span>1</span>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="buy-btn">Comprar Ahora</button>
+            </div>
+        
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section class="contact-section" id="contacto">
+        <div class="contact-content">
+            <img src="JV.webp" alt="Logo ELECTRÓNICA JV" class="logo-footer">
+            
+            <h2 class="service-message">
+                ¡Contamos con servicio técnico especializado!
+            </h2>
+
+            <div class="thanks-message">
+                <p>Servicio Técnico en Reparación de Electrodomesticos.</p>
+                <p>Visitanos Para mas información.</p>
+                <h1>REPARAMOS:</h1>
+                <ul>
+                    <li>Todo en Equipos De Sonido"Plantas, Cabinas, Parlantes, Amplificadores..."</li>
+                    <li>Tv Smart y Tv Antiguo</li>
+                    <li>Computadores</li>
+                    <li>Electrodomesticos "Ollas Air Frier, Planchas, Licuadoras Etc..."</li>
+                </ul>
+                
+            </div>
+            <h1>Contactanos via WhatsApp Para más información</h1>
+            <a href="https://wa.me/573137621044" class="whatsapp-btn" target="_blank">
+                <img src="descarga.png" alt="WhatsApp" width="24">
+                Contactar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>ELECTRÓNICA JV - Especialistas en Reparación Electrónica por mas de 30 años</p>
+        <p>© 2025 Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Control de Cantidad
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const span = button.parentElement.querySelector('span');
+                let quantity = parseInt(span.textContent);
+                
+                button.textContent === '+' ? quantity++ : quantity--;
+                if(quantity < 1) quantity = 1;
+                
+                span.textContent = quantity;
+            });
+        });
+
+        // Redirección WhatsApp
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.closest('.product-card').querySelector('h3').textContent;
+                const quantity = button.closest('.product-card').querySelector('.quantity-controls span').textContent;
+                const message = `Hola ELECTRÓNICA JV, estoy interesado en comprar ${quantity} unidades de: ${product}`;
+                const whatsappURL = `https://wa.me/573137621044?text=${encodeURIComponent(message)}`;
+                window.open(whatsappURL, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
