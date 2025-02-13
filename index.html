@@ -1,602 +1,767 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELECTRÓNICA JV - Especialistas en Sonido y Reparación</title>
-    <style>
-        /* Estilos generales */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELECTRÓNICA JV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+        color: #000000;
+        --color-destacado: #60A5FA;
+      --dark-bg:linear-gradient(135deg, #ffffff 0%, #1E3A8A 100%);
+        color: #000000;
+        --color-destacado: #60A5FA;
+      --accent: #facc15;
+      --light-bg: #ffffff;
+      --text-color: #1f2937;
+      --soft-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
 
-        body {
-            background: linear-gradient(135deg, #1a1a1a, #200000);
-            color: #ffffff;
-            position: relative;
-            overflow-x: hidden;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1920&q=80') center/cover;
-            opacity: 0.1;
-            z-index: -2;
-        }
+    body {
+      background: var(--dark-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
 
-        /* Navegación mejorada */
-        .nav-container {
-            background: rgba(0, 0, 0, 0.9); 
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid #51ff00;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition:  0.3s, transform 0.3s;
+    }
 
-        nav {
-            max-width: 1200px;
-            margin: 1 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .navbar-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .logo {
-            font-size: 2rem;
-            color: #00f2ff;
-            text-shadow: 0 0 15px rgba(23, 168, 175, 0.5);
-            animation: neonGlow 2s infinite alternate;
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #000;
+    }
 
-        @keyframes neonGlow {
-            0% {
-                text-shadow: 0 0 10px #52ff02fd;
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-            }
-        }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+    .nav-link {
+      color: #4b5563;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
 
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s;
-            position: relative;
-        }
+    .nav-link:hover {
+      color: #3b82f6;
+    }
 
-        .nav-links a:hover {
-            background: #02ff5e;
-        }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3b82f6;
+      transition: width 0.3s;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #00f3ff;
-            transition: width 0.3s;
-        }
+    .nav-link:hover::after {
+      width: 100%;
+    }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    .cart-button {
+      position: relative;
+      padding: 0.5rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
 
-        /* Sección Hero con efecto parallax */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            background: radial-gradient(circle, rgba(4, 20, 4, 0.973) 0%, rgba(0,0,0,0) 70%);
-            position: relative;
-            overflow: hidden;
-        }
+    .cart-button:hover {
+      transform: scale(1.1);
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1920&q=80') center/cover;
-            opacity: 0.1;
-            z-index: -1;
-            animation: parallax 05s infinite alternate;
-        }
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ef4444;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        @keyframes parallax {
-            0% {
-                transform: scale(1) translateY(0);
-            }
-            100% {
-                transform: scale(1.1) translateY(-20px);
-            }
-        }
+    /* Hero Section */
+    .hero {
+      padding: 6rem 1rem 4rem;
+      background: var(--primary-gradient);
+      color: #fff;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
 
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 3rem;
-            text-shadow: 0 0 20px rgba(0, 243, 255, 0.7);
-            animation: fadeIn 2s ease-in-out;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .hero-content p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #ffffff;
-            animation: fadeIn 2s ease-in-out;
-        }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        /* Sección de Productos con efecto de tarjetas 3D */
-        .products-section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* Products Section */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 2rem 0 1rem;
+    }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+    .products-grid {
+      max-width: 1280px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-        .product-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            perspective: 1000px;
-        }
+    .product-card {
+      background: var(--light-bg);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .product-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 20px 40px #00f3ff33;
-        }
-    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
 
-        .img-container {
-            width: 100%;
-            height: 250px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 1.5rem;
-            transform-style: preserve-3d;
-        }
+    .product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
 
-        .product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s;
-        }
+    .product-info {
+      padding: 1.5rem;
+    }
 
-        .img-container:hover .product-img {
-            transform: scale(1.1) rotateY(5deg);
-        }
+    .product-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
 
-        .price {
-            color: #00f2ff;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin: 1rem 0;
-            text-shadow: 0 0 10px #00f3ff80;
-        }
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
 
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
+    .product-description {
+      color: #000000;
+      margin-bottom: 1rem;
+    }
 
-        .quantity-btn {
-            background: rgba(0, 243, 255, 0.3);
-            border: none;
-            color: #fff;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+    /* Services Section */
+    .services-section {
+      background:   linear-gradient(135deg, #065F46 0%, #059669 100%);
+        color: #000000;
+        --color-destacado: #34D399;
+      padding: 4rem 0;
+    }
 
-        .quantity-btn:hover {
-            background: #00f3ff;
-            transform: scale(1.1);
-        }
+    .services-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
 
-        .buy-btn {
-            background: linear-gradient(45deg, #06f3ff, #0747a8);
-            border: none;
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: block;
-            width: 100%;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+    .service-card {
+      background: var(--light-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: var(--soft-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        .buy-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-        }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
 
-        /* Sección de Contacto con efecto de vidrio */
-        .contact-section {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            margin-top: 4rem;
-            backdrop-filter: blur(10px);
-        }
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      background:linear-gradient(135deg, #065F46 0%, #059669 100%);
+        color: #D1FAE5;
+        --color-destacado: #34D399;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+      color: #171718;
+    }
 
-        .contact-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* Contact Section */
+    .contact-section {
+      padding: 4rem 0;
+      background: 
+        linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+        color: #000000;
+        --color-destacado: #60A5FA;
+      }
+    .contact-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
 
-        .logo-footer {
-            width: 200px;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.5));
-            animation: float 1s infinite alternate;
-        }
+    .contact-card {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: var(--soft-shadow);
+    }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-10px);
-            }
-        }
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #3b82f6;
+    }
 
-        .service-message {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #00f3ff;
-            text-shadow: 0 0 15px rgba(15, 18, 19, 0.5);
-        }
+    /* Footer */
+    .footer {
+      background: #020c1a;
+      color: #fff;
+      padding: 4rem 0 2rem;
+    }
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #02ff5e;
-            color: #000000;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 2rem 0;
-            transition: transform 0.3s;
-        }
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-        }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
 
-        .thanks-message {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem auto;
-            max-width: 800px;
-            border-left: 4px solid #00f3ff;
-            backdrop-filter: blur(5px);
-        }
+    .footer-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
 
-        /* Footer con efecto de neón */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.9);
-            border-top: 2px solid #02ff5e;
-            box-shadow: 0 0 20px rgba(2, 242, 255, 0.959);
-        }
+    .footer-section p {
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
 
-        footer p {
-            margin: 0.5rem 0;
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-        }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .product-card {
-                padding: 1rem;
-            }
-            
-            .service-message {
-                font-size: 1.5rem;
-            }
-        }
-        
-    </style>
-     <script>
-        // Menú móvil
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+    .social-link {
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
+    .social-link:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #1c222c;
+      color: #6e6262;
+    }
+
+    /* Botones */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .button-primary {
+      background: var(--primary-gradient);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .button-whatsapp {
+      background: linear-gradient(to right, #25d366, #128c7e);
+      color: #000;
+    }
+
+    .button-whatsapp:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Modal Carrito */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 28rem;
+      background: #fff;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #0943b9;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+    }
+
+    .cart-item > div {
+      flex: 1;
+    }
+
+    .cart-item button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #ef4444;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .products-grid,
+      .services-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .modal-content { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navegación -->
-    <div class="nav-container">
-        <nav>
-            <div class="logo">ELECTRÓNICA JV</div>
-            <div class="nav-links">
-                <a href="#inicio">Inicio</a>
-                <a href="#productos">Productos</a>
-                <a href="#contacto">Contacto</a>
-            </div>
-        </nav>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="logo">ELECTRÓNICA JV</div>
+      <div class="nav-links">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </div>
+      <button class="cart-button" onclick="toggleCart()">
+        🛒 <span class="cart-count" id="cart-count">0</span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Sección Hero -->
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h1>Reparación y Venta de Equipos Electrónicos</h1>
-            <p>Electrónica JV es una Tienda de Electrónica ubicada en el municipio de Samaná Caldas, La cual cuenta con servicio técnico especializado en reparación de Equipos Electronicos. Si tienes Un equipo Electrónico, y deseas repararlo "NO DUDES EN CONTACTARNOS". ¡Tenemos Servicio de Revisión Totalmente Gratuito! </p>
-        <p>Contamos con venta de Sonido para tu Negocio y hogar, ademas de eso te damos garantia 100% del producto comprado en nuestra tienda</h1>
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <h1>Reparación y venta de aparatos electrónicos</h1>
+    <p>En ELECTRÓNICA JV encuentras equipos de sonido, televisores, computadoras y más. ¡Confía en nuestros expertos!</p>
+  </section>
+
+  <!-- Products Section -->
+  <section id="productos">
+    <h2 class="section-title">Nuestros Productos</h2>
+    <div class="products-grid" id="products-grid">
+      <!-- Los productos se cargarán con JavaScript -->
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="servicios" class="services-section">
+    <h2 class="section-title">Servicios Técnicos</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📺</div>
+        <h3>Reparación de TV</h3>
+        <p>Servicio técnico especializado en televisores.</p>
+        <button class="button button-whatsapp" onclick="requestService('Reparación de TV')">Solicitar Servicio</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Reparación de Computadores</h3>
+        <p>Mantenimiento y reparación de equipos.</p>
+        <button class="button button-whatsapp" onclick="requestService('Reparación de Computadores')">Solicitar Servicio</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎵</div>
+        <h3>Equipos de Sonido</h3>
+        <p>Reparación de sistemas de audio.</p>
+        <button class="button button-whatsapp" onclick="requestService('Equipos de Sonido')">Solicitar Servicio</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Electrodomésticos</h3>
+        <p>Reparación de electrodomésticos.</p>
+        <button class="button button-whatsapp" onclick="requestService('Electrodomésticos')">Solicitar Servicio</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="contact-section">
+    <h2 class="section-title">Contáctanos</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h3>Teléfono</h3>
+        <p>+57 313 762 1044</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <h3>Email</h3>
+        <p>contacto@electronicajv.com</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <h3>Dirección</h3>
+        <p>Calle 8 #8-21, SAMANÁ CALDAS</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Electrónica JV</h3>
+          <p>Expertos en reparación y venta de equipos electrónicos.</p>
         </div>
-    </section>
-    <section class="products-section" id="productos">
-        <h2 class="section-title">Productos Destacados</h2>
-        <div class="products-grid">
-            <!-- Producto 1 -->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="Amplificador Audio Sound.jpg" alt="Amplificador ST 1500W" class="product-img">
-                </div>
-                <h3>AMPLIFICADOR ST 1500W AUDIO SOUND ASAMP3000</h3>
-                <ul>
-                    <li>Entrada USB/SD</li>
-                    <li>Bluetooth 5.0</li>
-                    <li>3 entradas para micrófonos</li>
-                    <li>Radio FM integrada</li>
-                    <li>Control remoto</li>
-                    <li>Capacidad para 4 cabinas de 15 Pulgadas</li>
-                </ul>
-                <div class="price">$1.200.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="Screenshot_1_20250127_93332284.jpg" alt="Amplificador de Sonido" class="product-img">
-                </div>
-                <h3>Amplificador de Sonido</h3>
-                <ul>
-                    <li>Puertos USB y mini SD</li>
-                    <li>Radio FM</li>
-                    <li>Capacidad para 2 Cabinas 10 Pulgadas y 3 parlantes tipo teatro</li>
-                    <li>Doble ecualizador</li>
-                    <li>Bluetooth 5.0</li>
-                </ul>
-                <div class="price">$800.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-
-            <!-- Productos 3 al 10 (estructura similar) -->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="CabinaActiva_20250127_21307800.jpg" alt="Amplificador de Sonido" class="product-img">
-                </div>
-                <h3>Cabina de Sonido Activa 15 Pulgadas</h3>
-                <ul>
-                    <li>Puertos USB y mini SD</li>
-                    <li>Parlante: 15" pulgadas</li>
-                    <li>Bluetooth 5.0</li>
-                    <li>Radio FM</li>
-                    <li>Voltaje: 120-230 Voltios (NO es recargable)</li>
-                    <li>Entrada para 2 micrófonos</li>
-                </ul>
-                <div class="price">$900.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-           <!--producto 4-->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="AntenaTDT_20250127_214252348.jpg" alt="Amplificador de Sonido" class="product-img">
-                </div>
-                <h3>Antena aerea TDT</h3>
-                <ul>
-                    <li>Ganancia 6-10 dBi</li>
-                    <li>Incluye cable de 10 metros</li>
-                </ul>
-                <div class="price">$55.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-              <!--producto 6-->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="Amplificador.jpg" alt="Amplificador de Sonido" class="product-img">
-                </div>
-                <h3>Amplificador de Sonido 50W</h3>
-                <ul>
-                    <li>Puertos USB y mini SD</li>
-                    <li>Radio FM</li>
-                    <li>Bluetooth 5.0</li>
-                    <li>Capacidad para 2 parlantes tipo Teatro</li>
-                    <li>Control remoto</li>
-                </ul>
-                <div class="price">$500.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-            <!--producto 7-->
-            <div class="product-card">
-                <div class="img-container">
-                    <img src="Consola.jpg" alt="Amplificador de Sonido" class="product-img">
-                </div>
-                <h3>Behringer XENYX X1622USB</h3>
-                <ul>
-                    <li>Mezclador de 16 canales con interfaz USB</li>
-                    <li>Procesador de efectos integrado de 24 bits</li>
-                    <li>Ecualizadores de estilo "británico"</li>
-                    <li>Garantía limitada de 6 meses por behringer</li>
-                </ul>
-                <div class="price">$2.000.000</div>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>1</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-                <button class="buy-btn">Comprar Ahora</button>
-            </div>
-        
-    </section>
-
-    <!-- Sección de Contacto -->
-    <section class="contact-section" id="contacto">
-        <div class="contact-content">
-            <img src="JV.webp" alt="Logo ELECTRÓNICA JV" class="logo-footer">
-            
-            <h2 class="service-message">
-                ¡Contamos con servicio técnico especializado!
-            </h2>
-
-            <div class="thanks-message">
-                <p>Servicio Técnico en Reparación de Electrodomesticos.</p>
-                <p>Visitanos Para mas información.</p>
-                <h1>REPARAMOS:</h1>
-                <ul>
-                    <li>Todo en Equipos De Sonido"Plantas, Cabinas, Parlantes, Amplificadores..."</li>
-                    <li>Tv Smart y Tv Antiguo</li>
-                    <li>Computadores</li>
-                    <li>Electrodomesticos "Ollas Air Frier, Planchas, Licuadoras Etc..."</li>
-                </ul>
-                
-            </div>
-            <h1>Contactanos via WhatsApp Para más información</h1>
-            <a href="https://wa.me/573137621044" class="whatsapp-btn" target="_blank">
-                <img src="descarga.png" alt="WhatsApp" width="24">
-                Contactar por WhatsApp
-            </a>
+        <div class="footer-section">
+          <h3>Horario de Atención</h3>
+          <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+          <p>Sábados y Domingos: 9:00 AM - 4:00 PM</p>
         </div>
-    </section>
+        <div class="footer-section">
+          <h3>Síguenos</h3>
+          <div class="social-links">
+            <a href="#" class="social-link">Facebook</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Electrónica JV. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer>
-        <p>ELECTRÓNICA JV - Especialistas en Reparación Electrónica por mas de 30 años</p>
-        <p>© 2025 Todos los derechos reservados</p>
-    </footer>
+  <!-- Modal Carrito -->
+  <div class="modal" id="cart-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Carrito de Compras</h2>
+        <button class="close-button" onclick="toggleCart()">×</button>
+      </div>
+      <div id="cart-items">
+        <!-- Los items del carrito se cargarán con JavaScript -->
+      </div>
+      <div class="cart-total" style="margin-top: auto;">
+        <p>Total: <span id="cart-total">$0.00</span></p>
+        <button class="button button-whatsapp" onclick="checkout()">Comprar por WhatsApp</button>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <script>
+    // Datos de productos
+    const products = [
+      {
+        id: '1',
+        name: 'AMPLIFICADOR ST 1500W AUDIO SOUND ASAMP3000',
+        price: 1200000,
+        image: 'Amplificador Audio Sound.jpg',
+        description: 'Entrada USB/SD, Radio FM, Bluetooth 3.0, Control remoto, Micrófono, Capacidad 4 cabinas 15 Pulgadas'
+      },
+      {
+        id: '2',
+        name: 'MIXER BEHRINGER X2442USB CONSOLA PASIVA 16 CANALES',
+        price: 2000000,
+        image: 'consola.jpg',
+        description: 'Mezclador de 16 canales con interfaz USB, Procesador de efectos integrado de 24 bits, Ecualizadores de estilo "británico"'
+      },
+      {
+        id: '3',
+        name: 'AK-450URB AMPLIFICADOR STEREO AUDIO SOUND',
+        price: 750000,
+        image: 'amplificad.jpg',
+        description: 'Entrada USB/SD, Radio FM, Bluetooth 3.0, Control remoto, Soporte para equipo tipo teatro'
+      },
+      {
+        id: '4',
+        name: 'CABINA DE SONIDO ACTIVA 15 PULGADAS',
+        price: 900000,
+        image: 'dasa.jpg',
+        description: 'Parlante 15 Pulgadas, Entrada USB/SD, Radio FM, Bluetooth 3.0, Control remoto, Micrófono, Voltaje: 120-230V (NO recargable)'
+      },
+      {
+        id: '5',
+        name: 'AMPLIFICADOR 50W',
+        price: 500000,
+        image: 'amplificador.jpg',
+        description: 'Entrada USB/SD, Radio FM, Bluetooth 3.0, Control remoto, Soporte para equipo tipo teatro'
+      },
+      {
+        id: '6',
+        name: 'ANTENA AEREA TDT',
+        price: 60000,
+        image: 'tdt.jpg',
+        description: 'Ganancia 6-10 dBi, Incluye cable (10 metros)'
+      }
+    ];
 
-        // Control de Cantidad
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const span = button.parentElement.querySelector('span');
-                let quantity = parseInt(span.textContent);
-                
-                button.textContent === '+' ? quantity++ : quantity--;
-                if(quantity < 1) quantity = 1;
-                
-                span.textContent = quantity;
-            });
-        });
+    let cartItems = [];
 
-        // Redirección WhatsApp
-        document.querySelectorAll('.buy-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const product = button.closest('.product-card').querySelector('h3').textContent;
-                const quantity = button.closest('.product-card').querySelector('.quantity-controls span').textContent;
-                const message = `Hola ELECTRÓNICA JV, estoy interesado en comprar ${quantity} unidades de: ${product}`;
-                const whatsappURL = `https://wa.me/573137621044?text=${encodeURIComponent(message)}`;
-                window.open(whatsappURL, '_blank');
-            });
-        });
-    </script>
+    // Renderizar productos
+    function renderProducts() {
+      const productsGrid = document.getElementById('products-grid');
+      productsGrid.innerHTML = products.map(product => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-description">${product.description}</p>
+            <p class="product-price">$${product.price.toLocaleString()}</p>
+            <button class="button button-primary" onclick="addToCart('${product.id}')">Añadir al carrito</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Funciones del carrito
+    function toggleCart() {
+      const modal = document.getElementById('cart-modal');
+      if(modal.classList.contains('show')) {
+        modal.classList.remove('show');
+      } else {
+        modal.classList.add('show');
+      }
+      renderCart();
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existingItem = cartItems.find(item => item.id === productId);
+
+      if(existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.push({ ...product, quantity: 1 });
+      }
+
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartCount() {
+      const count = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+    }
+
+    function renderCart() {
+      const cartContainer = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+
+      if(cartItems.length === 0) {
+        cartContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+        cartTotal.textContent = '$0.00';
+        return;
+      }
+
+      cartContainer.innerHTML = cartItems.map(item => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <h3>${item.name}</h3>
+            <p>$${item.price.toLocaleString()} x ${item.quantity}</p>
+            <div>
+              <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+              <span style="margin: 0 8px;">${item.quantity}</span>
+              <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+            </div>
+          </div>
+          <button onclick="removeFromCart('${item.id}')">×</button>
+        </div>
+      `).join('');
+
+      const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      cartTotal.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function updateQuantity(id, quantity) {
+      if(quantity <= 0) {
+        cartItems = cartItems.filter(item => item.id !== id);
+      } else {
+        const item = cartItems.find(item => item.id === id);
+        if(item) { item.quantity = quantity; }
+      }
+      updateCartCount();
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      cartItems = cartItems.filter(item => item.id !== id);
+      updateCartCount();
+      renderCart();
+    }
+
+    function checkout() {
+      if(cartItems.length === 0) return;
+      const message = cartItems.map(item => `${item.quantity}x ${item.name} ($${item.price.toLocaleString()})`).join('\n');
+      const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      const whatsappMessage = `Hola! Me gustaría comprar:\n${message}\n\nTotal: $${total.toFixed(2)}`;
+      window.open(`https://wa.me/573137621044?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    }
+
+    function requestService(service) {
+      const message = `Hola, me gustaría información sobre el servicio de ${service}`;
+      window.open(`https://wa.me/573137621044?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    renderProducts();
+    updateCartCount();
+
+    // Cerrar el carrito al hacer clic fuera del modal
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('cart-modal');
+      if(e.target === modal) {
+        toggleCart();
+      }
+    });
+
+    // Smooth scrolling para los enlaces de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
+
